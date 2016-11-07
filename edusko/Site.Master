@@ -8,14 +8,15 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - Edusko</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -49,17 +50,19 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <a class="navbar-brand" runat="server" href="~/">
+                        <img src="Images/logo.png" alt="Edusko" />
+
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                    <ul class="nav navbar-nav pull-left">
+                        <li><a runat="server" href="~/">Request a Quote</a></li>
+                        <li><a runat="server" href="~/About">Meet our Advisory Board</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">
                                 <li><a runat="server" href="~/Account/Register">Register</a></li>
                                 <li><a runat="server" href="~/Account/Login">Log in</a></li>
                             </ul>
@@ -73,15 +76,89 @@
                             </ul>
                         </LoggedInTemplate>
                     </asp:LoginView>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown"><a runat="server" class="dropdown-toggle" data-toggle="dropdown" href="~/Contact.aspx">Contact Us  <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><span class="fa fa-mobile"></span>08020856102</a></li>
+                                <li><a href="#"><span class="fa fa-envelope-square"></span>info@edusko.com</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="container body-content">
+        <div class="container-fluid body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            <footer class="main clearfix">
+
+                <div class="container-fluid">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h4 class="page-header">Edusko</h4>
+                                        <div class="about-edusko">
+                                            <p>We are helping parents find quality school for their children. We want to help you find the right school</p>
+                                            <p>&copy; <%= DateTime.Now.Year %> - Edusko</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-7 pull-right">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h4 class="page-header">Find School
+                                        </h4>
+                                        <ul>
+                                            <li><a href="">Nursery</a></li>
+                                            <li><a href="">Primary</a></li>
+                                            <li><a href="">Secondary</a></li>
+                                            <li><a href="">Tertiarys</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4 class="page-header">Company</h4>
+                                        <ul>
+                                            <li><a href="~/TermsandConditions" runat="server">Terms and Conditions</a>
+
+                                            </li>
+                                            <li><a href="~/About.aspx" runat="server">About</a>
+
+                                            </li>
+                                            <li><a href="~/Contact.aspx">Contact</a>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4 class="page-header">Social</h4>
+                                        <div class="social-button btn-group">
+                                            <a href="www.facebook.com/edusko" target="_blank" class="fa fa-facebook"></a>
+                                            <a href="www.googleplus.com/edusko" target="_blank" class="fa fa-google-plus"></a>
+                                            <a href="www.twitter.com/edusko" target="_blank" class="fa fa-twitter"></a>
+                                            <a href="www.linkedin.com/edusko" target="_blank" class="fa fa-linkedin"></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
             </footer>
         </div>
     </form>
