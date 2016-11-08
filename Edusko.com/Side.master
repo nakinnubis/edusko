@@ -1,47 +1,10 @@
-﻿<%@ Page Title="Search Results" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Search-Results.aspx.vb" Inherits="edusko.Search_Results1" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Side.master.cs" Inherits="Edusko.com.Side" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainPlaceHolder" runat="server">
+</asp:Content>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-    <section>
-        <br />
-        <br />
-        <br />
-        <div class="row">
-            <div class="col-md-8">
-                <div class="list-group">
-                    <div class="row list-group-item">
-                        <div class="col-md-4">
-                            <img src="Images/FeaturedSchool/Featured1.jpg" class="img-responsive img-thumbnail" />
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <li>School Name: Edusko High School</li>
-                                    <li>Loction: Lagos</li>
-                                    <li>School Type: Secondary</li>
-                                    <li>Curriculum/ Program offered: Science</li>
-                                    <li>Admission/Application fees: </li>
-                                </div>
-                                <div class="col-md-6">
-                                    <a href="" type="button" class="btn-lg btn-warning">10% off your child fees</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <a href="" type="button" class="btn btn-primary">Learn more about this schoool</a>
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="" type="button" class="btn btn-success">Apply to this School</a>
-                                </div>
-                                <div class="col-md-3">
-                                    <a href="" type="button" class="btn btn-danger">Make enquiry</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+<asp:Content ID="Content3" ContentPlaceHolderID="SidePlaceHolder" runat="server">
             <div class="col-md-4">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Find school by name, location, program, type">
@@ -153,10 +116,5 @@
                 </div>
 
             </div>
-        </div>
-
-
-
-    </section>
-
+    
 </asp:Content>
