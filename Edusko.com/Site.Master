@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Edusko.com.Site" %>
+
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -41,8 +42,10 @@
                                     <li><a href="Login.aspx">Login</a></li>
                                     <li><a href="Register.aspx">Register</a></li>
                                     <li><a href="AccountUpdate.aspx">Account Update</a></li>
-                                    <li><a href="#"><span class="fa fa-mobile"></span>08020856102</a></li>
-                                    <li><a href="#"><span class="fa fa-envelope-square"></span>info@edusko.com</a></li>
+                                    <li><a href="Apply.aspx">Apply</a></li>
+                                    <li><a href="Further-Enquiry.aspx">Further Enquiry</a></li>
+                                     <li><a href="School-Profile.aspx">School Profile</a></li>
+                                      <li><a href="Search-Result.aspx">Search Result</a></li>
                                     <li><a href="#"><span class="fa fa-mobile"></span>08020856102</a></li>
                                     <li><a href="#"><span class="fa fa-envelope-square"></span>info@edusko.com</a></li>
                                 </ul>

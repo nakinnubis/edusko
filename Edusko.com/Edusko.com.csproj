@@ -82,9 +82,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Further-Enquiry.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
+    <Content Include="School-Profile.aspx" />
+    <Content Include="Search-Result.aspx" />
     <Content Include="Site.Master" />
     <Content Include="Side.master" />
     <Content Include="Sidebar.Master" />
@@ -209,6 +212,13 @@
     <Compile Include="Defualt.aspx.designer.cs">
       <DependentUpon>Defualt.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Further-Enquiry.aspx.cs">
+      <DependentUpon>Further-Enquiry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Further-Enquiry.aspx.designer.cs">
+      <DependentUpon>Further-Enquiry.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +243,20 @@
     </Compile>
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="School-Profile.aspx.cs">
+      <DependentUpon>School-Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="School-Profile.aspx.designer.cs">
+      <DependentUpon>School-Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search-Result.aspx.cs">
+      <DependentUpon>Search-Result.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search-Result.aspx.designer.cs">
+      <DependentUpon>Search-Result.aspx</DependentUpon>
     </Compile>
     <Compile Include="Side.master.cs">
       <DependentUpon>Side.master</DependentUpon>
