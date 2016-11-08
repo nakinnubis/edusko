@@ -266,7 +266,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="NestedMasterPage1.master" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Login.aspx" />
     <Content Include="Registeration.aspx" />
@@ -520,13 +519,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="NestedMasterPage1.master.designer.vb">
-      <DependentUpon>NestedMasterPage1.master</DependentUpon>
-    </Compile>
-    <Compile Include="NestedMasterPage1.master.vb">
-      <DependentUpon>NestedMasterPage1.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Registeration.aspx.designer.vb">
       <DependentUpon>Registeration.aspx</DependentUpon>

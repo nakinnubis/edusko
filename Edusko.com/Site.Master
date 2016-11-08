@@ -1,5 +1,4 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Edusko.com.Site" %>
-
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -32,12 +31,18 @@
                             <li><a runat="server" href="~/About">Meet our Advisory Board</a></li>
                         </ul>
                         <ul class="nav navbar-nav">
-                            <li><a runat="server" href="~/Account/Register">Register</a></li>
-                            <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                            <li><a runat="server" href="Register.aspx">Register</a></li>
+                            <li><a runat="server" href="Login.aspx">Log in</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown"><a runat="server" class="dropdown-toggle" data-toggle="dropdown" href="~/Contact.aspx">Contact Us  <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="Index.aspx">Home</a></li>
+                                    <li><a href="Login.aspx">Login</a></li>
+                                    <li><a href="Register.aspx">Register</a></li>
+                                    <li><a href="AccountUpdate.aspx">Account Update</a></li>
+                                    <li><a href="#"><span class="fa fa-mobile"></span>08020856102</a></li>
+                                    <li><a href="#"><span class="fa fa-envelope-square"></span>info@edusko.com</a></li>
                                     <li><a href="#"><span class="fa fa-mobile"></span>08020856102</a></li>
                                     <li><a href="#"><span class="fa fa-envelope-square"></span>info@edusko.com</a></li>
                                 </ul>
@@ -48,9 +53,6 @@
             </div>
             <asp:ContentPlaceHolder ID="MainPlaceHolder" runat="server">
             </asp:ContentPlaceHolder>
-             <asp:ContentPlaceHolder ID="SidePlaceHolder" runat="server">
-            </asp:ContentPlaceHolder>
-           
             <footer class="main clearfix">
                 <div class="container-fluid">
                     <div class="container">

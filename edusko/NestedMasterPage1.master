@@ -1,3 +1,0 @@
-﻿<%@ Master Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="false" CodeBehind="NestedMasterPage1.master.vb" Inherits="edusko.NestedMasterPage1" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-</asp:Content>

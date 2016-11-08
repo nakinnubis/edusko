@@ -10,7 +10,7 @@
 namespace Edusko.com {
     
     
-    public partial class Site {
+    public partial class Sidebar {
         
         /// <summary>
         /// head control.
@@ -22,21 +22,30 @@ namespace Edusko.com {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
-        /// form control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// MainPlaceHolder control.
+        /// leftColumn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainPlaceHolder;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder leftColumn;
+        
+        /// <summary>
+        /// rightColumn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder rightColumn;
     }
 }

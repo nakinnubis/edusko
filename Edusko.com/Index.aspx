@@ -55,7 +55,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <a class="btn btn-primary btn-lg" href="Default.aspx">Submit</a>
+                                <a class="btn btn-primary btn-lg" href="Defualt.aspx">Submit</a>
                                 <%--<button type="button" class="btn btn-primary" onClick="RedirectUser()">Submit</button>--%>
                             </div>
 
