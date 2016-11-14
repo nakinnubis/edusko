@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EduskoVbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EduskoVbModelStoreContainer">
+    <EntitySet Name="SchoolOwners" EntityType="EduskoVbModel.Store.SchoolOwners" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SchoolDetails" EntityType="EduskoVbModel.Store.SchoolDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SchoolBranches" EntityType="EduskoVbModel.Store.SchoolBranches" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SchoolAdmins" EntityType="EduskoVbModel.Store.SchoolAdmins" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="SchoolOwnerSchoolDetail" Association="EduskoVbModel.Store.SchoolOwnerSchoolDetail">
+      <End Role="SchoolOwner" EntitySet="SchoolOwners" />
+      <End Role="SchoolDetail" EntitySet="SchoolDetails" />
+    </AssociationSet>
+    <AssociationSet Name="SchoolDetailSchoolBranch" Association="EduskoVbModel.Store.SchoolDetailSchoolBranch">
+      <End Role="SchoolDetail" EntitySet="SchoolDetails" />
+      <End Role="SchoolBranch" EntitySet="SchoolBranches" />
+    </AssociationSet>
+    <AssociationSet Name="SchoolOwnerSchoolAdmin" Association="EduskoVbModel.Store.SchoolOwnerSchoolAdmin">
+      <End Role="SchoolOwner" EntitySet="SchoolOwners" />
+      <End Role="SchoolAdmin" EntitySet="SchoolAdmins" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="SchoolOwners">
+    <Key>
+      <PropertyRef Name="SchoolOwnerId" />
+    </Key>
+    <Property Name="SchoolOwnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNumber" Type="int" Nullable="false" />
+    <Property Name="Active" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SchoolDetails">
+    <Key>
+      <PropertyRef Name="ScholDetailId" />
+    </Key>
+    <Property Name="ScholDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SchoolName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Address" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="SchoolBranchId" Type="int" Nullable="false" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="SchoolOwnerSchoolOwnerId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SchoolBranches">
+    <Key>
+      <PropertyRef Name="SchoolBranchId" />
+    </Key>
+    <Property Name="SchoolBranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SchoolBranchDescription" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="SchoolTypeId" Type="int" Nullable="false" />
+    <Property Name="SchoolCategoryId" Type="int" Nullable="false" />
+    <Property Name="SchoolDetailScholDetailId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SchoolAdmins">
+    <Key>
+      <PropertyRef Name="SchoolAdminId" />
+    </Key>
+    <Property Name="SchoolAdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="LastName" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="255" />
+    <Property Name="Active" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SchoolOwnerSchoolOwnerId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="SchoolOwnerSchoolDetail">
+    <End Role="SchoolOwner" Type="EduskoVbModel.Store.SchoolOwners" Multiplicity="1" />
+    <End Role="SchoolDetail" Type="EduskoVbModel.Store.SchoolDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolOwner">
+        <PropertyRef Name="SchoolOwnerId" />
+      </Principal>
+      <Dependent Role="SchoolDetail">
+        <PropertyRef Name="SchoolOwnerSchoolOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolDetailSchoolBranch">
+    <End Role="SchoolDetail" Type="EduskoVbModel.Store.SchoolDetails" Multiplicity="1" />
+    <End Role="SchoolBranch" Type="EduskoVbModel.Store.SchoolBranches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolDetail">
+        <PropertyRef Name="ScholDetailId" />
+      </Principal>
+      <Dependent Role="SchoolBranch">
+        <PropertyRef Name="SchoolDetailScholDetailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchoolOwnerSchoolAdmin">
+    <End Role="SchoolOwner" Type="EduskoVbModel.Store.SchoolOwners" Multiplicity="1" />
+    <End Role="SchoolAdmin" Type="EduskoVbModel.Store.SchoolAdmins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SchoolOwner">
+        <PropertyRef Name="SchoolOwnerId" />
+      </Principal>
+      <Dependent Role="SchoolAdmin">
+        <PropertyRef Name="SchoolOwnerSchoolOwnerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EduskoVbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EduskoVbModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="SchoolOwners" EntityType="EduskoVbModel.SchoolOwner" />
+          <EntitySet Name="SchoolDetails" EntityType="EduskoVbModel.SchoolDetail" />
+          <EntitySet Name="SchoolBranches" EntityType="EduskoVbModel.SchoolBranch" />
+          <AssociationSet Name="SchoolOwnerSchoolDetail" Association="EduskoVbModel.SchoolOwnerSchoolDetail">
+            <End Role="SchoolOwner" EntitySet="SchoolOwners" />
+            <End Role="SchoolDetail" EntitySet="SchoolDetails" />
+          </AssociationSet>
+          <AssociationSet Name="SchoolDetailSchoolBranch" Association="EduskoVbModel.SchoolDetailSchoolBranch">
+            <End Role="SchoolDetail" EntitySet="SchoolDetails" />
+            <End Role="SchoolBranch" EntitySet="SchoolBranches" />
+          </AssociationSet>
+          <EntitySet Name="SchoolAdmins" EntityType="EduskoVbModel.SchoolAdmin" />
+          <AssociationSet Name="SchoolOwnerSchoolAdmin" Association="EduskoVbModel.SchoolOwnerSchoolAdmin">
+            <End Role="SchoolOwner" EntitySet="SchoolOwners" />
+            <End Role="SchoolAdmin" EntitySet="SchoolAdmins" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="SchoolOwner">
+          <Key>
+            <PropertyRef Name="SchoolOwnerId" />
+          </Key>
+          <Property Name="SchoolOwnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="SchoolDetails" Relationship="EduskoVbModel.SchoolOwnerSchoolDetail" FromRole="SchoolOwner" ToRole="SchoolDetail" />
+          <NavigationProperty Name="SchoolAdmins" Relationship="EduskoVbModel.SchoolOwnerSchoolAdmin" FromRole="SchoolOwner" ToRole="SchoolAdmin" />
+        </EntityType>
+        <EntityType Name="SchoolDetail">
+          <Key>
+            <PropertyRef Name="ScholDetailId" />
+          </Key>
+          <Property Name="ScholDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="SchoolBranchId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SchoolOwner" Relationship="EduskoVbModel.SchoolOwnerSchoolDetail" FromRole="SchoolDetail" ToRole="SchoolOwner" />
+          <Property Name="SchoolOwnerSchoolOwnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SchoolBranches" Relationship="EduskoVbModel.SchoolDetailSchoolBranch" FromRole="SchoolDetail" ToRole="SchoolBranch" />
+        </EntityType>
+        <EntityType Name="SchoolBranch">
+          <Key>
+            <PropertyRef Name="SchoolBranchId" />
+          </Key>
+          <Property Name="SchoolBranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolBranchDescription" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="SchoolTypeId" Type="Int32" Nullable="false" />
+          <Property Name="SchoolCategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SchoolDetail" Relationship="EduskoVbModel.SchoolDetailSchoolBranch" FromRole="SchoolBranch" ToRole="SchoolDetail" />
+          <Property Name="SchoolDetailScholDetailId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SchoolOwnerSchoolDetail">
+          <End Type="EduskoVbModel.SchoolOwner" Role="SchoolOwner" Multiplicity="1" />
+          <End Type="EduskoVbModel.SchoolDetail" Role="SchoolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwner">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolDetail">
+              <PropertyRef Name="SchoolOwnerSchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SchoolDetailSchoolBranch">
+          <End Type="EduskoVbModel.SchoolDetail" Role="SchoolDetail" Multiplicity="1" />
+          <End Type="EduskoVbModel.SchoolBranch" Role="SchoolBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolDetail">
+              <PropertyRef Name="ScholDetailId" />
+            </Principal>
+            <Dependent Role="SchoolBranch">
+              <PropertyRef Name="SchoolDetailScholDetailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SchoolAdmin">
+          <Key>
+            <PropertyRef Name="SchoolAdminId" />
+          </Key>
+          <Property Name="SchoolAdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="255" />
+          <Property Name="Active" Type="String" Nullable="false" />
+          <NavigationProperty Name="SchoolOwner" Relationship="EduskoVbModel.SchoolOwnerSchoolAdmin" FromRole="SchoolAdmin" ToRole="SchoolOwner" />
+          <Property Name="SchoolOwnerSchoolOwnerId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SchoolOwnerSchoolAdmin">
+          <End Type="EduskoVbModel.SchoolOwner" Role="SchoolOwner" Multiplicity="1" />
+          <End Type="EduskoVbModel.SchoolAdmin" Role="SchoolAdmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwner">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolAdmin">
+              <PropertyRef Name="SchoolOwnerSchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EduskoVbModelStoreContainer" CdmEntityContainer="EduskoVbModelContainer">
+    <EntitySetMapping Name="SchoolOwners">
+      <EntityTypeMapping TypeName="IsTypeOf(EduskoVbModel.SchoolOwner)">
+        <MappingFragment StoreEntitySet="SchoolOwners">
+          <ScalarProperty Name="SchoolOwnerId" ColumnName="SchoolOwnerId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(EduskoVbModel.SchoolDetail)">
+        <MappingFragment StoreEntitySet="SchoolDetails">
+          <ScalarProperty Name="ScholDetailId" ColumnName="ScholDetailId" />
+          <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="SchoolBranchId" ColumnName="SchoolBranchId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="SchoolOwnerSchoolOwnerId" ColumnName="SchoolOwnerSchoolOwnerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolBranches">
+      <EntityTypeMapping TypeName="IsTypeOf(EduskoVbModel.SchoolBranch)">
+        <MappingFragment StoreEntitySet="SchoolBranches">
+          <ScalarProperty Name="SchoolBranchId" ColumnName="SchoolBranchId" />
+          <ScalarProperty Name="SchoolBranchDescription" ColumnName="SchoolBranchDescription" />
+          <ScalarProperty Name="SchoolTypeId" ColumnName="SchoolTypeId" />
+          <ScalarProperty Name="SchoolCategoryId" ColumnName="SchoolCategoryId" />
+          <ScalarProperty Name="SchoolDetailScholDetailId" ColumnName="SchoolDetailScholDetailId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SchoolAdmins">
+      <EntityTypeMapping TypeName="IsTypeOf(EduskoVbModel.SchoolAdmin)">
+        <MappingFragment StoreEntitySet="SchoolAdmins">
+          <ScalarProperty Name="SchoolAdminId" ColumnName="SchoolAdminId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="SchoolOwnerSchoolOwnerId" ColumnName="SchoolOwnerSchoolOwnerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

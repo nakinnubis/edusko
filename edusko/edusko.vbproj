@@ -72,6 +72,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -209,6 +211,17 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="EduskoVbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EduskoVbModel.Context.vb</LastGenOutput>
+      <DependentUpon>EduskoVbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EduskoVbModel.edmx.sql" />
+    <Content Include="EduskoVbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EduskoVbModel.vb</LastGenOutput>
+      <DependentUpon>EduskoVbModel.edmx</DependentUpon>
+    </Content>
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Account\Web.config" />
     <Content Include="fonts\FontAwesome.otf" />
@@ -266,6 +279,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="EduskoVbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EduskoVbModel.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EduskoVbModel.edmx.diagram">
+      <DependentUpon>EduskoVbModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Login.aspx" />
     <Content Include="Registeration.aspx" />
@@ -476,6 +496,21 @@
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EduskoVbModel.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoVbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EduskoVbModel.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoVbModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EduskoVbModel.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoVbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Further-Enquiry.aspx.designer.vb">
       <DependentUpon>Further-Enquiry.aspx</DependentUpon>
     </Compile>
@@ -533,6 +568,18 @@
     <Compile Include="School-Profile.aspx.vb">
       <DependentUpon>School-Profile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SchoolAdmin.vb">
+      <DependentUpon>EduskoVbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolBranch.vb">
+      <DependentUpon>EduskoVbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolDetail.vb">
+      <DependentUpon>EduskoVbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolOwner.vb">
+      <DependentUpon>EduskoVbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="School\Nigeria.aspx.designer.vb">
       <DependentUpon>Nigeria.aspx</DependentUpon>
@@ -595,6 +642,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
