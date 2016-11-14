@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EduskodbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applicants">
+          <Key>
+            <PropertyRef Name="ApplicantId" />
+          </Key>
+          <Property Name="ApplicantId" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="bigint" Nullable="false" />
+          <Property Name="CountryDesc" Type="varbinary" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="LocalGovernments">
+          <Key>
+            <PropertyRef Name="LocalGovernmentId" />
+          </Key>
+          <Property Name="LocalGovernmentId" Type="bigint" Nullable="false" />
+          <Property Name="LocalGovernmentDescription" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SchoolBranches">
+          <Key>
+            <PropertyRef Name="SchoolBranchId" />
+          </Key>
+          <Property Name="SchoolBranchId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolDetailId" Type="bigint" />
+          <Property Name="SchoolTypeId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolCategoryId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolBranchDesc" Type="varchar" MaxLength="250" />
+          <Property Name="LocalGovernmentId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SchoolDetails">
+          <Key>
+            <PropertyRef Name="SchoolDetailId" />
+          </Key>
+          <Property Name="SchoolDetailId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolOwnerId" Type="bigint" Nullable="false" />
+          <Property Name="SchoolBranchId" Type="bigint" />
+          <Property Name="CountryId" Type="bigint" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="500" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="SchoolCategoryId" Type="bigint" />
+          <Property Name="SchoolTypeId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SchoolOwners">
+          <Key>
+            <PropertyRef Name="SchoolOwnerId" />
+          </Key>
+          <Property Name="SchoolOwnerId" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="Email" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="LastLoginDate" Type="smalldatetime" />
+          <Property Name="LoginCount" Type="int" />
+        </EntityType>
+        <EntityType Name="SchoolUsers">
+          <Key>
+            <PropertyRef Name="SchoolUserId" />
+          </Key>
+          <Property Name="SchoolUserId" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="Password" Type="varchar" MaxLength="255" />
+          <Property Name="SchoolOwnerId" Type="bigint" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="bigint" Nullable="false" />
+          <Property Name="StateDesc" Type="varchar" MaxLength="255" />
+          <Property Name="CountryId" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_SchoolBranch_SchoolDetail">
+          <End Role="LocalGovernments" Type="Self.LocalGovernments" Multiplicity="0..1" />
+          <End Role="SchoolBranches" Type="Self.SchoolBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalGovernments">
+              <PropertyRef Name="LocalGovernmentId" />
+            </Principal>
+            <Dependent Role="SchoolBranches">
+              <PropertyRef Name="LocalGovernmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolDetail_SchoolDetail">
+          <End Role="SchoolOwners" Type="Self.SchoolOwners" Multiplicity="1" />
+          <End Role="SchoolDetails" Type="Self.SchoolDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwners">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolDetails">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolUser_SchoolOwner">
+          <End Role="SchoolOwners" Type="Self.SchoolOwners" Multiplicity="1" />
+          <End Role="SchoolUsers" Type="Self.SchoolUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwners">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolUsers">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_State">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+          <End Role="States" Type="Self.States" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EduskodbModelStoreContainer">
+          <EntitySet Name="Applicants" EntityType="Self.Applicants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalGovernments" EntityType="Self.LocalGovernments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolBranches" EntityType="Self.SchoolBranches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolDetails" EntityType="Self.SchoolDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolOwners" EntityType="Self.SchoolOwners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SchoolUsers" EntityType="Self.SchoolUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SchoolBranch_SchoolDetail" Association="Self.FK_SchoolBranch_SchoolDetail">
+            <End Role="LocalGovernments" EntitySet="LocalGovernments" />
+            <End Role="SchoolBranches" EntitySet="SchoolBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolDetail_SchoolDetail" Association="Self.FK_SchoolDetail_SchoolDetail">
+            <End Role="SchoolOwners" EntitySet="SchoolOwners" />
+            <End Role="SchoolDetails" EntitySet="SchoolDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolUser_SchoolOwner" Association="Self.FK_SchoolUser_SchoolOwner">
+            <End Role="SchoolOwners" EntitySet="SchoolOwners" />
+            <End Role="SchoolUsers" EntitySet="SchoolUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_State" Association="Self.FK_State_State">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EduskodbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Applicant">
+          <Key>
+            <PropertyRef Name="ApplicantId" />
+          </Key>
+          <Property Name="ApplicantId" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int64" Nullable="false" />
+          <Property Name="CountryDesc" Type="Binary" MaxLength="255" FixedLength="false" />
+          <NavigationProperty Name="States" Relationship="Self.FK_State_State" FromRole="Countries" ToRole="States" />
+        </EntityType>
+        <EntityType Name="LocalGovernment">
+          <Key>
+            <PropertyRef Name="LocalGovernmentId" />
+          </Key>
+          <Property Name="LocalGovernmentId" Type="Int64" Nullable="false" />
+          <Property Name="LocalGovernmentDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SchoolBranches" Relationship="Self.FK_SchoolBranch_SchoolDetail" FromRole="LocalGovernments" ToRole="SchoolBranches" />
+        </EntityType>
+        <EntityType Name="SchoolBranch">
+          <Key>
+            <PropertyRef Name="SchoolBranchId" />
+          </Key>
+          <Property Name="SchoolBranchId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolDetailId" Type="Int64" />
+          <Property Name="SchoolTypeId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolCategoryId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolBranchDesc" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LocalGovernmentId" Type="Int64" />
+          <NavigationProperty Name="LocalGovernment" Relationship="Self.FK_SchoolBranch_SchoolDetail" FromRole="SchoolBranches" ToRole="LocalGovernments" />
+        </EntityType>
+        <EntityType Name="SchoolDetail">
+          <Key>
+            <PropertyRef Name="SchoolDetailId" />
+          </Key>
+          <Property Name="SchoolDetailId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolOwnerId" Type="Int64" Nullable="false" />
+          <Property Name="SchoolBranchId" Type="Int64" />
+          <Property Name="CountryId" Type="Int64" />
+          <Property Name="SchoolName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolCategoryId" Type="Int64" />
+          <Property Name="SchoolTypeId" Type="Int64" />
+          <NavigationProperty Name="SchoolOwner" Relationship="Self.FK_SchoolDetail_SchoolDetail" FromRole="SchoolDetails" ToRole="SchoolOwners" />
+        </EntityType>
+        <EntityType Name="SchoolOwner">
+          <Key>
+            <PropertyRef Name="SchoolOwnerId" />
+          </Key>
+          <Property Name="SchoolOwnerId" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="LastLoginDate" Type="DateTime" Precision="0" />
+          <Property Name="LoginCount" Type="Int32" />
+          <NavigationProperty Name="SchoolDetails" Relationship="Self.FK_SchoolDetail_SchoolDetail" FromRole="SchoolOwners" ToRole="SchoolDetails" />
+          <NavigationProperty Name="SchoolUsers" Relationship="Self.FK_SchoolUser_SchoolOwner" FromRole="SchoolOwners" ToRole="SchoolUsers" />
+        </EntityType>
+        <EntityType Name="SchoolUser">
+          <Key>
+            <PropertyRef Name="SchoolUserId" />
+          </Key>
+          <Property Name="SchoolUserId" Type="Int64" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolOwnerId" Type="Int64" Nullable="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="SchoolOwner" Relationship="Self.FK_SchoolUser_SchoolOwner" FromRole="SchoolUsers" ToRole="SchoolOwners" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int64" Nullable="false" />
+          <Property Name="StateDesc" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="Int64" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_State_State" FromRole="States" ToRole="Countries" />
+        </EntityType>
+        <Association Name="FK_State_State">
+          <End Role="Countries" Type="Self.Country" Multiplicity="0..1" />
+          <End Role="States" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="States">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolBranch_SchoolDetail">
+          <End Role="LocalGovernments" Type="Self.LocalGovernment" Multiplicity="0..1" />
+          <End Role="SchoolBranches" Type="Self.SchoolBranch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LocalGovernments">
+              <PropertyRef Name="LocalGovernmentId" />
+            </Principal>
+            <Dependent Role="SchoolBranches">
+              <PropertyRef Name="LocalGovernmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolDetail_SchoolDetail">
+          <End Role="SchoolOwners" Type="Self.SchoolOwner" Multiplicity="1" />
+          <End Role="SchoolDetails" Type="Self.SchoolDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwners">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolDetails">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SchoolUser_SchoolOwner">
+          <End Role="SchoolOwners" Type="Self.SchoolOwner" Multiplicity="1" />
+          <End Role="SchoolUsers" Type="Self.SchoolUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SchoolOwners">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Principal>
+            <Dependent Role="SchoolUsers">
+              <PropertyRef Name="SchoolOwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EduskodbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applicants" EntityType="Self.Applicant" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="LocalGovernments" EntityType="Self.LocalGovernment" />
+          <EntitySet Name="SchoolBranches" EntityType="Self.SchoolBranch" />
+          <EntitySet Name="SchoolDetails" EntityType="Self.SchoolDetail" />
+          <EntitySet Name="SchoolOwners" EntityType="Self.SchoolOwner" />
+          <EntitySet Name="SchoolUsers" EntityType="Self.SchoolUser" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="FK_State_State" Association="Self.FK_State_State">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="States" EntitySet="States" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolBranch_SchoolDetail" Association="Self.FK_SchoolBranch_SchoolDetail">
+            <End Role="LocalGovernments" EntitySet="LocalGovernments" />
+            <End Role="SchoolBranches" EntitySet="SchoolBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolDetail_SchoolDetail" Association="Self.FK_SchoolDetail_SchoolDetail">
+            <End Role="SchoolOwners" EntitySet="SchoolOwners" />
+            <End Role="SchoolDetails" EntitySet="SchoolDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SchoolUser_SchoolOwner" Association="Self.FK_SchoolUser_SchoolOwner">
+            <End Role="SchoolOwners" EntitySet="SchoolOwners" />
+            <End Role="SchoolUsers" EntitySet="SchoolUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EduskodbModelStoreContainer" CdmEntityContainer="EduskodbEntities">
+          <EntitySetMapping Name="Applicants">
+            <EntityTypeMapping TypeName="EduskodbModel.Applicant">
+              <MappingFragment StoreEntitySet="Applicants">
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="EduskodbModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="CountryDesc" ColumnName="CountryDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalGovernments">
+            <EntityTypeMapping TypeName="EduskodbModel.LocalGovernment">
+              <MappingFragment StoreEntitySet="LocalGovernments">
+                <ScalarProperty Name="LocalGovernmentId" ColumnName="LocalGovernmentId" />
+                <ScalarProperty Name="LocalGovernmentDescription" ColumnName="LocalGovernmentDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolBranches">
+            <EntityTypeMapping TypeName="EduskodbModel.SchoolBranch">
+              <MappingFragment StoreEntitySet="SchoolBranches">
+                <ScalarProperty Name="SchoolBranchId" ColumnName="SchoolBranchId" />
+                <ScalarProperty Name="SchoolDetailId" ColumnName="SchoolDetailId" />
+                <ScalarProperty Name="SchoolTypeId" ColumnName="SchoolTypeId" />
+                <ScalarProperty Name="SchoolCategoryId" ColumnName="SchoolCategoryId" />
+                <ScalarProperty Name="SchoolBranchDesc" ColumnName="SchoolBranchDesc" />
+                <ScalarProperty Name="LocalGovernmentId" ColumnName="LocalGovernmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolDetails">
+            <EntityTypeMapping TypeName="EduskodbModel.SchoolDetail">
+              <MappingFragment StoreEntitySet="SchoolDetails">
+                <ScalarProperty Name="SchoolDetailId" ColumnName="SchoolDetailId" />
+                <ScalarProperty Name="SchoolOwnerId" ColumnName="SchoolOwnerId" />
+                <ScalarProperty Name="SchoolBranchId" ColumnName="SchoolBranchId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SchoolCategoryId" ColumnName="SchoolCategoryId" />
+                <ScalarProperty Name="SchoolTypeId" ColumnName="SchoolTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolOwners">
+            <EntityTypeMapping TypeName="EduskodbModel.SchoolOwner">
+              <MappingFragment StoreEntitySet="SchoolOwners">
+                <ScalarProperty Name="SchoolOwnerId" ColumnName="SchoolOwnerId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SchoolUsers">
+            <EntityTypeMapping TypeName="EduskodbModel.SchoolUser">
+              <MappingFragment StoreEntitySet="SchoolUsers">
+                <ScalarProperty Name="SchoolUserId" ColumnName="SchoolUserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SchoolOwnerId" ColumnName="SchoolOwnerId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="EduskodbModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateDesc" ColumnName="StateDesc" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

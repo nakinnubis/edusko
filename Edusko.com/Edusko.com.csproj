@@ -43,11 +43,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -73,6 +83,16 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Defualt.aspx" />
+    <Content Include="EduskoDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EduskoDbModel.Context.cs</LastGenOutput>
+      <DependentUpon>EduskoDbModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EduskoDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EduskoDbModel.edmx</DependentUpon>
+      <LastGenOutput>EduskoDbModel.cs</LastGenOutput>
+    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -91,6 +111,13 @@
     <Content Include="Site.Master" />
     <Content Include="Side.master" />
     <Content Include="Sidebar.Master" />
+    <EntityDeploy Include="EduskoDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EduskoDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="EduskoDbModel.edmx.diagram">
+      <DependentUpon>EduskoDbModel.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -198,6 +225,9 @@
     <Compile Include="AcountUpdate.aspx.designer.cs">
       <DependentUpon>AcountUpdate.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Applicant.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Apply.aspx.cs">
       <DependentUpon>Apply.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -205,12 +235,30 @@
     <Compile Include="Apply.aspx.designer.cs">
       <DependentUpon>Apply.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Defualt.aspx.cs">
       <DependentUpon>Defualt.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Defualt.aspx.designer.cs">
       <DependentUpon>Defualt.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EduskoDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EduskoDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EduskoDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EduskoDbModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Further-Enquiry.aspx.cs">
       <DependentUpon>Further-Enquiry.aspx</DependentUpon>
@@ -228,6 +276,9 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LocalGovernment.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -250,6 +301,18 @@
     </Compile>
     <Compile Include="School-Profile.aspx.designer.cs">
       <DependentUpon>School-Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolBranch.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolDetail.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolOwner.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchoolUser.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Search-Result.aspx.cs">
       <DependentUpon>Search-Result.aspx</DependentUpon>
@@ -279,10 +342,16 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>EduskoDbModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
