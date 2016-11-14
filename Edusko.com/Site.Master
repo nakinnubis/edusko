@@ -41,7 +41,7 @@
                                     <li><a href="Index.aspx">Home</a></li>
                                     <li><a href="Login.aspx">Login</a></li>
                                     <li><a href="Register.aspx">Register</a></li>
-                                    <li><a href="AccountUpdate.aspx">Account Update</a></li>
+                                    <li><a href="AcountUpdate.aspx">Account Update</a></li>
                                     <li><a href="Apply.aspx">Apply</a></li>
                                     <li><a href="Further-Enquiry.aspx">Further Enquiry</a></li>
                                      <li><a href="School-Profile.aspx">School Profile</a></li>
